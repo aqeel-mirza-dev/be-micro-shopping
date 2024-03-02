@@ -1,1 +1,1 @@
-# be-micro-shopping
+# be-micro-product
