@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping(path="productservice")
 public class ProductController {
@@ -16,6 +15,11 @@ public class ProductController {
     // end point will be noun-verb structure
     @Autowired
     private ProductService productService;
+
+    @GetMapping(value="/welcome")
+    public String welcome(){
+        return "welcome to landing page with Spring security";
+    }
 
     @PostMapping(value="/products/create")
     public Product createProduct(@RequestBody Product product){
