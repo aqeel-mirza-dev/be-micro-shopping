@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -28,39 +29,10 @@ public class ProjectSecurityConfig {
                 .httpBasic(Customizer.withDefaults()).build();
     }
 
-    /*
-    @Bean
-    public InMemoryUserDetailsManager userDetailService(){
-        //approach 1
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("12345")
-                .authorities("admin")
-                .build();
 
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("12345")
-                .authorities("read")
-                .build();
-
-        //approach 2 where we use noOpPasswordEncoder Bean for generating the users
-        UserDetails admin1 = User.withUsername("admin1").password("12345").authorities("admin").build();
-
-        UserDetails user1 = User.withUsername("user1").password("12345").authorities("read").build();
-
-        return new InMemoryUserDetailsManager(admin1,user1);
-    }
-*/
-   // JDBC based user management
-    /*@Bean
-    public UserDetailsService userDetailsService(DataSource dataSource){
-        return new JdbcUserDetailsManager(dataSource);
-    }
-     */
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
 
     }
 

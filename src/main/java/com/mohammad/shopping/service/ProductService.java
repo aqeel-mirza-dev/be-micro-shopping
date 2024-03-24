@@ -2,6 +2,7 @@ package com.mohammad.shopping.service;
 
 import com.mohammad.shopping.model.Product;
 import com.mohammad.shopping.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
