@@ -1,15 +1,29 @@
 package com.mohammad.shopping.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.mohammad.shopping.model.Contact;
+import com.mohammad.shopping.repository.ContactRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
+import java.util.Random;
 
 @RestController
-@RequestMapping(path="contactservice")
 public class ContactController {
 
-    @GetMapping(value="/contacts/detail")
-    public String getContactDetail(){
-        return "Here are contact details from the DB";
+    @Autowired
+    private ContactRepository contactRepository;
+
+    @PostMapping("/contact")
+    public Contact saveContactInquiryDetails(@RequestBody Contact contact) {
+        contact.setContactId(getServiceReqNumber());
+        contact.setCreateDt(new Date(System.currentTimeMillis()));
+        return contactRepository.save(contact);
+    }
+
+    public String getServiceReqNumber() {
+        Random random = new Random();
+        int ranNum = random.nextInt(999999999 - 9999) + 9999;
+        return "SR"+ranNum;
     }
 }

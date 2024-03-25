@@ -23,8 +23,8 @@ public class ProjectSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable().authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/accountservice/accounts/detail","/balanceservice/balances/detail","/cardsservice/cards/detail").authenticated()
-                        .requestMatchers("/noticeservice/notices/detail","/contactservice/contacts/detail","/register").permitAll())
+                        .requestMatchers("/accounts","/balances","/cards").authenticated()
+                        .requestMatchers("/notices","/contacts","/register").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults()).build();
     }
